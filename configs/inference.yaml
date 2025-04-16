@@ -1,0 +1,66 @@
+# Inference Configuration
+
+# General inference settings
+inference:
+  device: "cuda"  # Options: "cuda", "cpu"
+  fp16: true  # Use mixed precision inference
+  batch_size: 1
+  seed: 42
+
+# Model checkpoint
+model:
+  checkpoint_path: "checkpoints/dreamactor_m1_full.pt"
+  stage: "full_body"  # Options: "portrait", "upper_body", "full_body"
+  
+# Input settings
+input:
+  image_size: 512  # Base resolution for inference
+  resize_mode: "auto"  # Options: "auto", "portrait", "upper_body", "full_body"
+  center_crop: false
+  keep_aspect_ratio: true
+  
+# Animation settings
+animation:
+  fps: 30
+  duration: 5.0  # Duration in seconds
+  smoothing: true  # Apply temporal smoothing
+  smoothing_window: 3  # Smoothing window size
+  
+# Motion guidance settings
+motion_guidance:
+  # Facial guidance
+  facial:
+    enabled: true
+    intensity: 1.0  # Intensity multiplier for facial expressions
+    
+  # Head sphere guidance
+  head_sphere:
+    enabled: true
+    intensity: 0.8  # Intensity multiplier for head movements
+    
+  # Body skeleton guidance
+  body_skeleton:
+    enabled: true
+    intensity: 1.0  # Intensity multiplier for body movements
+    
+# Appearance guidance settings
+appearance_guidance:
+  reference_frames:
+    enabled: true
+    weight: 0.7
+  sequential_coherence:
+    enabled: true
+    weight: 0.5
+    window_size: 5  # Number of previous frames to consider
+    
+# Diffusion settings
+diffusion:
+  sampling_steps: 50  # Number of diffusion sampling steps
+  guidance_scale: 7.5  # Classifier-free guidance scale
+  
+# Output settings
+output:
+  format: "mp4"  # Options: "mp4", "gif", "png_sequence"
+  quality: "high"  # Options: "low", "medium", "high"
+  save_individual_frames: false
+  save_intermediate_results: false

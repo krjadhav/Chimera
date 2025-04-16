@@ -1,0 +1,47 @@
+# Data Preprocessing Configuration
+
+# Paths
+data:
+  raw_data_dir: "data/raw"
+  processed_data_dir: "data/processed"
+  
+# Processing parameters
+preprocessing:
+  image_size: 512  # Base size for input images
+  resize_scales:
+    portrait: 1.0  # Scale factor for portrait images
+    upper_body: 1.2  # Scale factor for upper body images
+    full_body: 1.5  # Scale factor for full body images
+  
+  # Motion guidance processing
+  facial_representation:
+    enabled: true
+    landmarks_model: "mediapipe"  # Options: "mediapipe", "face_alignment"
+    
+  head_sphere:
+    enabled: true
+    resolution: 64  # Resolution of the 3D head sphere representation
+    
+  body_skeleton:
+    enabled: true
+    model: "openpose"  # Options: "openpose", "detectron2"
+    keypoints: 18  # Number of keypoints to use
+    
+  # Appearance guidance processing
+  sequential_frames:
+    window_size: 5  # Number of sequential frames for temporal coherence
+    
+  # Data augmentation
+  augmentation:
+    enabled: true
+    rotation_range: 5  # Degrees
+    translation_range: 0.05  # Fraction of image size
+    brightness_range: 0.1
+    contrast_range: 0.1
+    
+# Dataset splitting
+dataset:
+  train_ratio: 0.8
+  val_ratio: 0.1
+  test_ratio: 0.1
+  random_seed: 42

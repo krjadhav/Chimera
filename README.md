@@ -22,15 +22,29 @@ ChimeraAI is a comprehensive system for human image animation that can generate 
 ### How It Works
 
 ```
-┌─────────────────┐    ┌──────────────────┐    ┌────────────────┐
-│  Input Image    │    │ Motion Source    │    │  Guidance      │
-│  (Reference)    │───▶│ (Video/Skeleton) │───▶│  Extraction    │
-└─────────────────┘    └──────────────────┘    └────────┬───────┘
-                                                        │
-┌─────────────────┐    ┌──────────────────┐    ┌────────▼───────┐
-│   Generated     │◀───│   Diffusion      │◀───│   Hybrid       │
-│   Animation     │    │   Transformer    │    │   Guidance     │
-└─────────────────┘    └──────────────────┘    └────────────────┘
+┌─────────────────┐     
+│  Input Image    │────┐    
+│  (Reference)    │    │    ┌────────────────┐
+└─────────────────┘    ├───▶│  Guidance      │
+                       │    │  Extraction    │
+┌──────────────────┐   │    └────────┬───────┘
+│ Motion Source    │───┘             │
+│ (Video/Skeleton) │                 │
+└──────────────────┘                 ▼
+                             ┌───────────────┐
+                             │   Hybrid      │
+                             │   Guidance    │
+                             └───────┬───────┘
+                                     │
+                             ┌───────▼───────┐
+                             │   Diffusion   │
+                             │  Transformer  │
+                             └───────┬───────┘
+                                     │
+                             ┌───────▼───────┐
+                             │   Generated   │
+                             │   Animation   │
+                             └───────────────┘
 ```
 
 The system operates in the following way:

@@ -1,0 +1,88 @@
+# Training Configuration
+
+# General training settings
+training:
+  seed: 42
+  epochs: 300
+  batch_size: 16
+  gradient_accumulation_steps: 2
+  learning_rate: 0.0001
+  lr_scheduler: "cosine"  # Options: "cosine", "linear", "step"
+  warmup_steps: 1000
+  fp16: true  # Mixed precision training
+  gradient_clipping: 1.0
+  save_every: 5000  # Save checkpoint every N steps
+  eval_every: 1000  # Evaluate every N steps
+
+# Progressive training settings
+progressive_training:
+  enabled: true
+  stages:
+    - name: "portrait"
+      epochs: 100
+      image_size: 256
+      batch_size: 32
+    - name: "upper_body"
+      epochs: 100
+      image_size: 384
+      batch_size: 24
+    - name: "full_body"
+      epochs: 100
+      image_size: 512
+      batch_size: 16
+
+# Diffusion model settings
+diffusion:
+  noise_steps: 1000
+  beta_start: 0.0001
+  beta_end: 0.02
+  beta_schedule: "linear"  # Options: "linear", "cosine"
+
+# DiT (Diffusion Transformer) settings
+model:
+  type: "dit"
+  img_size: 512
+  patch_size: 2
+  in_channels: 3
+  hidden_size: 1024
+  depth: 24
+  num_heads: 16
+  mlp_ratio: 4.0
+  dropout: 0.1
+  attention_dropout: 0.1
+  
+# Hybrid guidance settings
+hybrid_guidance:
+  # Motion guidance weights
+  facial_weight: 1.0
+  head_sphere_weight: 0.8
+  body_skeleton_weight: 1.0
+  
+  # Appearance guidance weights
+  sequential_frames_weight: 0.5
+  visual_reference_weight: 0.7
+  
+# Loss settings
+loss:
+  recon_weight: 1.0
+  perceptual_weight: 0.1
+  identity_weight: 0.5
+  temporal_weight: 0.3
+  
+# Optimization
+optimizer:
+  type: "adamw"  # Options: "adam", "adamw", "sgd"
+  weight_decay: 0.01
+  betas: [0.9, 0.999]
+  
+# Distributed training
+distributed:
+  enabled: false
+  world_size: 1
+  backend: "nccl"
+  
+# Logging
+logging:
+  wandb: true
+  project_name: "ChimeraAI"
+  log_images_every: 500  # Log generated images every N steps
