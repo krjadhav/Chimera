@@ -159,12 +159,6 @@ Future development plans for ChimeraAI include:
 ChimeraAI is inspired by the DreamActor-M1 research. If you use this implementation in your research, please cite both ChimeraAI and the original DreamActor-M1 paper:
 
 ```bibtex
-@article{ChimeraAI,
-  title={ChimeraAI: A Framework for Human Image Animation with Hybrid Guidance},
-  author={ChimeraAI Team},
-  year={2025}
-}
-
 @article{DreamActorM1,
   title={DreamActor-M1: Holistic, Expressive and Robust Human Image Animation with Hybrid Guidance},
   author={Luo, Yuxuan and Rong, Zhengkun and Wang, Lizhen and Zhang, Longhao and Hu, Tianshu and Zhu, Yongming},
